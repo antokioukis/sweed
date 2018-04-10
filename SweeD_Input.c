@@ -4132,6 +4132,9 @@ void removeMonomorphicSites (int strictPolymorphic, int monomorphic, FILE * fp)
 
 	fprintf(stdout,"\n\t\tDiscarded sites:\t%d",counter + alignment->discSites);	
 	fprintf(fp,"\n\t\tDiscarded sites:\t%d",counter + alignment->discSites);
+	fprintf(stdout,"\n\t\tKept sites:\t%d",alignment->segsites - counter - alignment->discSites);	
+	fprintf(fp,"\n\t\tKept sites:\t%d",alignment->segsites - counter - alignment->discSites);
+
 }
 
 int readAlignmentMACS(FILE *fp, alignment_struct *alignment, FILE *fpInfo, FILE *fpSFo, int minsnps_threshold_user, int alignmentIndex)
