@@ -4132,8 +4132,8 @@ void removeMonomorphicSites (int strictPolymorphic, int monomorphic, FILE * fp)
 
 	fprintf(stdout,"\n\t\tDiscarded sites:\t%d",counter + alignment->discSites);	
 	fprintf(fp,"\n\t\tDiscarded sites:\t%d",counter + alignment->discSites);
-	fprintf(stdout,"\n\t\tKept sites:\t%d",alignment->segsites - counter - alignment->discSites);	
-	fprintf(fp,"\n\t\tKept sites:\t%d",alignment->segsites - counter - alignment->discSites);
+	fprintf(stdout,"\n\t\tKept sites:\t%d",alignment->segsites - alignment->discSites);	
+	fprintf(fp,"\n\t\tKept sites:\t%d",alignment->segsites - alignment->discSites);
 
 }
 
