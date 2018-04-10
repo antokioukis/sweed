@@ -2956,7 +2956,7 @@ int readAlignmentFASTA(FILE *fp, alignment_struct *alignment, FILE *fpInfo, FILE
 	  {
 	    fprintf(stderr, "Warning: BOTH outgroup AND folded are provided.... FOLDED is considered\n\n\n");
 	    for(i=0;i<alignment->segsites;i++)
-	      alignment->folded[i] = userSetFolded;
+	      alignment->folded[i] = alignment->userSetFolded;
 	  }
 
 	if(outgroupCounter==0)
