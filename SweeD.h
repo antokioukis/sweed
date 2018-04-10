@@ -139,7 +139,6 @@ char runName[INFILENAMESIZE];
 typedef float cor_t;
 
 
-
 cor_t ABS (cor_t input);
 
 double mainTime0;
@@ -169,6 +168,7 @@ typedef struct
 	al_t *x; // number of derived bases in every site
 	al_t *x_t; // number of derived bases in every site
 	float 	       * positions;
+  float *mutationTime;
 	int 	       * positionsInd;
 	int 	       * p_t;
 	unsigned char *folded;
