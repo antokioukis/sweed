@@ -3960,6 +3960,9 @@ int readAlignmentVCF(FILE *fp, alignment_struct * alignment, FILE *fpInfo, FILE 
 
 	for(i=0;i<alignment->segsites;i++)
 	{
+	  if(alignment->userSetFolded == 1)
+	    alignment->folded[i] = alignment->userSetFolded;
+	  
 		if(alignment->n[i]<alignment->minn)
 			alignment->minn = alignment->n[i];
 
@@ -4164,10 +4167,13 @@ int readAlignmentMACS(FILE *fp, alignment_struct *alignment, FILE *fpInfo, FILE 
 	alignment->positions = calloc(DIM, sizeof(float));
 	assert(alignment->positions != NULL);
 
+	alignment->mutationTime = calloc(DIM, sizeof(float));
+	assert(alignment->mutationTime != NULL);
+
 	
 	// read first line 
-	int temp = fscanf(fp, "%f", &alignment->positions[0]);
-	assert(temp==1);
+	int temp = fscanf(fp, "%f %f", &alignment->positions[0], &alignment->mutationTime[0]);
+	assert(temp==2);
 
 	alignment->sequences = 0;
 
@@ -4214,7 +4220,10 @@ int readAlignmentMACS(FILE *fp, alignment_struct *alignment, FILE *fpInfo, FILE 
 		
 		alignment->positions = realloc(alignment->positions, DIM*sizeof(float));
 		assert(alignment->positions != NULL);
-		
+
+		alignment->mutationTime = realloc(alignment->mutationTime, DIM*sizeof(float));
+		assert(alignment->mutationTime != NULL);
+
 		
 		for(i=prevDIM; i<DIM; ++i)
 		  {
@@ -4229,8 +4238,8 @@ int readAlignmentMACS(FILE *fp, alignment_struct *alignment, FILE *fpInfo, FILE 
 	    
 	    if(!strcmp(siteflag,"SITE:"))
 	      {
-		temp = fscanf(fp, "%d %f",&sitevar, &alignment->positions[nsnp]);
-		assert(temp==2);
+		temp = fscanf(fp, "%d %f %f",&sitevar, &alignment->positions[nsnp], &alignment->mutationTime[nsnp]);
+		assert(temp==3);
 
 		ent = fgetc(fp);
 
